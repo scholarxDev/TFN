@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Signup {% endblock %}
+
+{% block content %}
+
+
+<header>
+  {% block nav %} {% include 'nav-min.html' %} {% endblock nav %}
+</header>
+
+
+<main>
+  <div class=" mt-3">
+    <h1 class="font-weight-normal text-center my-4 sigunptext">Who are you joining as ?</h1>
+      <div class="conatiner">  
+        <div class="row mt-5 justify-content-center">
+          <div class="col-md-3 my-4">
+            <a href="/signup/student" class="text-decoration-none">
+              <div class="card dance ml-4" style="width:20rem">
+                <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561980839/scholarx.co/studentpage_rbv0pw.png"  class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title text-center" style="color: #0c5061">{{request.organization.student_account_alias}}</h5>
+                    <p class="card-text text-center" style="color: black">Selecting this means you want to join as {{request.organization.student_account_alias}}.</p>
+                  </div>
+              </div>
+            </a>
+       </div>
+       
+{% if request.organization.name == "scholarx"%}
+<div class="col-md-3 my-4">
+    <a href="/signup/school" class="text-decoration-none">
+      <div class="card dance mx-4" style="width:20rem">
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561980838/scholarx.co/school_ruta0p.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="color: #0c5061">School</h5>
+            <p class="card-text text-center" style="color: black">Selecting this means you want to join as a school.</p>
+          </div>
+      </div>
+      </a>
+
+</div>
+{%endif%}
+
+<div class="col-md-4 my-4 ">
+
+    <a href="/signup/sponsor" class="text-decoration-none">
+      <div class="card dance mx-4" style="width:20rem">
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561980838/scholarx.co/sponsor_nrsri8.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center " style="color: #0c5061">Sponsor</h5>
+            <p class="card-text text-center" style="color: black">Selecting this means you want to join as a sponsor.</p>
+          </div>
+      </div>
+    </a>
+
+</div>
+</div>
+</div>
+</div>
+</main>
+ 
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+
+{% endblock %}

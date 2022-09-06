@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<header>
+  {% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+    
+
+  <form method="get" class="mt-5">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+
+  <ul>
+  {% for scholarship in filter.qs %}
+    <li>{{ scholarship.name }} - {{ scholarship.college }}</li>
+  {% endfor %}
+  </ul>
+
+<footer>
+  {% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+{% endblock %}

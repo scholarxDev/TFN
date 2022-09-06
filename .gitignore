@@ -1,0 +1,10 @@
+venv
+*.pyc
+staticfiles
+.idea
+.env
+.vscode
+db.sqlite3/*
+node_modules
+mysite.log
+XDG_CACHE_HOME

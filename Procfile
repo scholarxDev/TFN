@@ -1,0 +1,1 @@
+web: gunicorn scholarx.wsgi --log-file -

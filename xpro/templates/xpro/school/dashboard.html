@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+
+<main>
+
+  <div class="container" style ='margin-top: 110px;'>
+    <h2>Hi {{ user.username }},welcome.</h2>
+    <div class="bluepart">
+      <hr class="caution">
+      <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/caution_nylyql.png" class="caution ml-4">
+      <div class="toptext">
+          <h4>Our privacy policy has changed</h4>
+          <p>Make sure you know how these changes affect you, kindly update your profile.</p>
+        </div> 
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-4 col-md-4 col-sm-12 apply">
+        <div class="card mt-3 campaigns" style="background-color: #ffffff;">
+          <div class="card-body">
+                <p class="card-title fundrequest">Fund Request</p>
+                <small class="card-text active" style="color: #4A90E2">0 active funding application.</small>
+                <div class="d-flex justify-content-end">
+                <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/managecampaign_gg28go.png" class="h-50 campaign" style="margin-top: -3rem">
+              </div> 
+        </div>  
+          </div>
+        </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card mt-3" >
+          <div class="card-body">
+            <h5 class="card-title">Subscribe for more</h5>
+            <p class="card-text">For N1,000 per year, get access to the most exclusive scholarships.</p>
+            <a href="#" class="btn btn-primary login-submit">Subscribe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="row">
+
+      <div class="container-fluid cmapign-statistics">
+  
+        <div class="col-lg-4 col-md-4 col-sm-12">
+  
+          <h3 class="statistics-heading" style="margin-top: 9rem">TRENDING</h3>
+  
+        </div>
+  
+        <div class="col-lg-12 col-md-12 col-sm-12 statistics-rule">
+  
+          <hr />
+  
+        </div>
+  
+      </div>
+  
+
+        <div class="container">
+          <div class="row">
+              {% for scholarship in scholarships %}
+                <div class="col-lg-4 col-md-4 col-sm-12 my-3">
+                  <div class="h-100">
+                    <div class="card-body scholarshipsofstudentdashboard">
+                        <h4 class="card-text" style="color: black"><a href="{{ scholarship.website }}" target="_blank" style="text-decoration: none">{{ scholarship.name | slice:":45" }}...</a></h4>
+                      <br>
+                      {% for category in scholarship.categories.all %}
+                      <a href="{% url 'scholarship_category' category.name %}" style="color: #96B46B">
+                      {{ category.name }}
+                      </a>&nbsp;
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+
+    </div>
+    </div>
+
+</main>
+
+
+
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+
+{% endblock %}

@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+<main id="mode" >
+   <!-- <div id="myModal" class="modal">
+     Modal content
+    <div class="modal-content imgmodal">
+    <span class="close">&times;</span>
+    <a href ="https://www.eventbrite.com/e/acadafest-tickets-66313658939" target = "_blank">
+    <img src ='https://res.cloudinary.com/schohxlg/image/upload/v1568127167/scholarx.co/WhatsApp_Image_2019-09-10_at_14.17.33_uv7gvw.jpg' class="h-75 w-75 center img-responsive"/>
+    </a>
+    </div> 
+    </div> -->
+
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+        {% if request.organization.subdomain_prefix == "scholarx"%}
+        <div class="carousel-item active">
+            <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561162144/scholarx.co/intro-bg2_jjbkj3.jpg" class="d-block w-100 img-responsive img-fluid" alt="background image" style="width: 100%">
+                <div class="carousel-caption">
+                    <h1 class ="mt-5">Quality Education For the Next Billion.</h1>
+                    <p>The <span class="trusted_emphasis"> Trusted</span> Platform For Financing Education In Africa.</p>
+                    <div>
+                        <p>We are trusted by:</p>
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1576249051/scholarx.co/Partners/british_council_jnwefk.png" alt="google Developer Launchpad"
+                            class="img-responsive gec">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/injini_geq5pa.png" alt="worldsummitaward"
+                            class="img-responsive wsa">
+                        <!-- <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/forbes_yjqzlq.png"  alt="forbes" class="img-responsive cnbc"> -->
+                        <!-- <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/next_bill_iue3p1.png" alt="Next Billion"
+                            class="img-responsive nis"> -->
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980712/scholarx.co/recognition/wise_q7dqhw.png" alt="sahara" class="img-responsive sah">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1576249050/scholarx.co/Partners/tecno-mobile_prrgvs.png" alt="sahara" class="img-responsive vmware">
+                    </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561162317/scholarx.co/intro-bg_zqk0wa.jpg" class="d-block w-100 img-responsive img-fluid" alt="background image" style="width: 100%">
+            <div class="carousel-caption">
+                    <h1>Quality Education For the Next Billion.</h1>
+                    <p>The <span class="trusted_emphasis"> Trusted</span> Platform For Financing Education In Africa.</p>
+                    <div>
+                        <p>We are recognized by:</p>
+                        <!-- <img src="https://res.cloudinary.com/schohxlg/image/upload/v1576249051/scholarx.co/Partners/british_council_jnwefk.png" alt="google Developer Launchpad"
+                        class="img-responsive gec"> -->
+                         <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/injini_geq5pa.png" alt="worldsummitaward"
+                        class="img-responsive wsa">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/forbes_yjqzlq.png"  alt="forbes" class="img-responsive cnbc">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980711/scholarx.co/recognition/next_bill_iue3p1.png" alt="Next Billion"
+                        class="img-responsive nis">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980712/scholarx.co/recognition/wise_q7dqhw.png" alt="sahara" class="img-responsive sah">
+                        <!-- <img src="https://res.cloudinary.com/schohxlg/image/upload/v1576249050/scholarx.co/Partners/tecno-mobile_prrgvs.png" alt="sahara" class="img-responsive vmware"> -->
+                   </div>
+            </div>
+        </div>
+        {% else %}
+        {% for carousel in request.organization.carousels.all %}
+        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+            <img src="{{carousel.image.url}}" class="d-block w-100 img-responsive img-fluid" alt="background image" style="width: 100%">
+            <div class="carousel-caption">
+                    <h1>{{carousel.header}}</h1>
+                    <p>{{carousel.body}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<!-- CAROUSEL ENDS -->
+
+{% if request.organization.name == "scholarx" %}    
+    <div class="container">
+        <h2 class="sponsors-header my-5" >Sp<span>ons</span>ors</h2>
+        <div class="row">
+            <div class="col-sm-6 mr-auto my-auto">
+                <h2>₦50m worth of scholarships managed</h2>
+                <p>Join us in solving the issue of access to funds for young Africans, because we believe dreams shouldn't be
+                    hindered by money.</p>
+                <a href="/village" ><button type="button" class=" xbtn btn btn-primary px-5 py-2" style="background-color: #8DB859;">Fund Village</button></a>
+                <a href="/campaign/create" style="color: #8DB859;" class="ml-4">Start Campaign &rarr;</a>
+            </div>
+            <div class="col-sm-6">
+                <div class="tilt" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">   
+                    <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561980834/scholarx.co/scholarships-managed_fnr0fo.jpg" class="img-responsive img-fluid homepagepic">
+                </div>
+            </div>
+        </div>
+        <h2 class="sponsors-header my-5">St<span>ude</span>nts</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="tilt" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">  
+                    <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1561162529/scholarx.co/quality-education_xqseog.jpg"  class="img-responsive img-fluid homepagepic">
+                </div>
+            </div>
+            <div class="col-sm-6 ml-auto my-auto">
+                <h2>No child gets left behind without quality education</h2>
+                <p>Join 100,000+ students to get funded.</p>
+                <a href="/village/fundrequest" ><button type="button" class=" xbtn btn btn-primary px-5 py-2" style="background-color: #8DB859;">Fund Request</button></a>
+            </div>
+        </div>
+    </div>
+   
+    <h3 class="text-center mt-5" style="color: #404742">We've got trending Scholarships for you</h3>
+   <div class="container">
+       <div class="row">
+           {% for scholarship in scholarships %}
+           <div class="col-lg-4 col-md-4 col-sm-12">
+             <a href="{{ scholarship.website }}" target="_blank" style="text-decoration: none">
+                <div class="card bg-light mt-5 dance" style="max-width: 20rem;height: 21rem;">
+                    <div class="card-header" style="color: #454545">
+                       <h5 style="color: #454545">{{scholarship.name}}</h5>  
+                    </div>
+                       <p class="card-title text-secondary mt-3">&nbsp; Award:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.award}}</span></p>
+                       <p class="card-title text-secondary mt-3">&nbsp; Deadline:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.deadline.date}}</span></p>
+                       <p class="card-title text-secondary mt-3">&nbsp; Country:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.country.name}}</span></p>
+                        <small>
+                            {% for category in scholarship.categories.all %}
+                               <a href="{% url 'scholarship_category' category.name %}" >
+                                   <div class="scholar mt-3">
+                                        {{ category.name }}
+                                   </div>
+                               </a>
+                                {% endfor %}
+                        </small>
+                 </div>
+                 </a>
+               </div>
+           
+         
+           {% endfor %}
+       </div>
+       </div>
+      
+      <div class="d-flex justify-content-center">
+        <a href="/scholarship/"><button type="button" class="btn btn-primary my-5"  style="background-color: #8DB859;">More Scholarships</button></a>
+      </div>
+{%else %}
+<div class="container">
+    <h2 class="sponsors-header my-5" >Sp<span>ons</span>ors</h2>
+    <div class="row">
+        <div class="col-sm-6 mr-auto my-auto">
+            <h2>Fund a Project</h2>
+            <p>Support our work. We collectively continue to work towards Teach For Nigeria’s vision that one day, every Nigerian child will have the opportunity to attain an excellent education.</p>
+            <a href="/village" ><button type="button" class=" xbtn btn btn-primary px-5 py-2" style="background-color: #8DB859;">Fund a Project</button></a>
+        </div>
+        <div class="col-sm-6">
+            <div class="tilt" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">   
+                <img src="{{request.organization.asset.about_image_2.url}}" class="img-responsive img-fluid homepagepic">
+            </div>
+        </div>
+    </div>
+    <h2 class="sponsors-header my-5" >Fe<span>llo</span>ws</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="tilt" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">  
+                    <img src="{{request.organization.asset.about_image.url}}" width=100%" height="100%">
+                </div>
+            </div>
+            <div class="col-sm-6 ml-auto my-auto">
+                <h2>Project Request</h2>
+                <p>Create an account or Login to submit a fund request for your unique project.</p>
+                
+                <a href="/village/fundrequest" ><button type="button" class=" xbtn btn btn-primary px-5 py-2" style="background-color: #8DB859;">Project Request</button></a>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+
+{% if request.organization.name == "scholarx" %}
+<!-- About ScholarX section -->
+    <div style="background-color: #0C5061" class="mt-5 text-white shape">
+            
+        <div class="container">
+            <div class="row d-flex justify-content-end">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <h2 class="about-header my-5 text-center">Abou<span>t Sch</span>olarX</h2>
+                    <h3 class="tutionraised text-center">N10 million in tuition raised and disbursed</h3>
+                    <div class="text-left">
+                        <p class="">ScholarX is a social impact platform that focuses on democratizing Access to
+                            Education for African Youth, by connecting them with funding sources that enable them to
+                            get quality education.</p>
+                        <h3 class="about-header mission mt-5 text-center">Our <span>Mis</span>sion</h3>
+                        <p class="text-center mt-3">To put African students on a better life path through access to
+                            quality education.</p>
+                        <h3 class="about-header partners mt-5 text-center">Our <span>Par</span>tners</h3>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980675/scholarx.co/Partners/npower_cqyrir.png" class=" px-3 py-3">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980675/scholarx.co/Partners/lagosinnovates_qhrxlp.png" class=" px-3 py-3">
+                       
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="/about"><button type="button" class="btn btn-outline-secondary my-5">More about us</button></a>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>          
+        </div>
+      
+    </div>
+
+{% else %}
+<!-- About ScholarX section -->
+<div style="background-color: #0C5061" class="mt-5 text-white shape">
+            
+    <div class="container">
+        <div class="row d-flex justify-content-end">
+            <div class="col-md-8">
+                <h2 class="about-header my-5 text-center">About TFN</h2>
+                <p style="margin:100px">Teach For Nigeria (TFN) is a Non-profit organization focused on developing a movement of leaders across the nation who are committed to ending educational inequity. Through a two-year Fellowship, TFN recruits Nigeria’s best and brightest graduates and young professionals of all academic disciplines to teach as full-time teachers (Fellows) in underserved schools in disadvantaged communities. Through this experience, our Fellows gain exposure to the realities of Nigeria’s education system and begin to identify their role in building a wider movement for educational equity. At Teach For Nigeria, we believe that there is no single solution to solving the education crisis in the country and as a result of this we encourage our second-year Fellows to work on various projects (called Be The Change Projects) proffering many solutions to challenges associated with delivering access to quality education to children in their placement schools/communities. So far, our Fellows have implemented a total of 72 Be The Change projects. In the long-term, we build and support a powerful force of Alumni, who, informed by their experiences and insights, work towards affecting systemic changes to realize educational opportunity for all. Our Alumni work in diverse roles within the education sector - as teachers, teacher-trainers, school curriculum designers, education researchers, social entrepreneurs and non profit leaders.</p>
+                
+            </div>
+            <div class="col-md-2"></div>
+        </div>          
+    </div>
+  
+</div>
+
+{% endif %}
+
+{% if request.organization.name == "scholarx" %}
+    
+    <!-- impact stories -->
+    <div class="container" id="impactstories">
+        <h2 class="impact-header text-center mt-5">Impa<span>ct S</span>tories</h2>
+        <div class="row justify-content-between mr-5 mt-5 ml-5">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 card  mb-3 p-0" style="max-width:29rem;">
+                <div class="card-body line">
+                    <p class="card-text">Thank you scholarX for exposing hidden scholarships for Nigerian students
+                        home and abroad.</p>
+                    <small class="text-secondary">Adekunle Ibrahim, UNILAG</small>
+                    <br />
+                    <small class="text-secondary">(Winner Sheyi Shay giveaway)</small>
+                </div>
+            </div>
+            <div class="card mb-3 p-0 col-lg-5 col-md-5 col-sm-12 col-xs-12" style="max-width: 29rem;">
+                <div class="card-body line">
+                    <div class="verticalLine">
+                        <p class="card-text">Now i can face my studies while ScholarX do the scholarship search for
+                            me and all i do is map the deadline to my calendar and apply later.</p>
+                        <small class="text-secondary">Ijaodola jamiu, LASU</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 class="text-center mt-5">Ready to make an impact on Education in Africa?</h4>
+        <h4 class="text-center">Get Started</h4>
+        <div class="d-flex justify-content-center mt-5 ">
+            <a href="/signup/student"><button type="button" class=" btn btn btn-primary px-5" style="background-color: #8DB859;">As a student</button></a>
+            <a href="/signup/sponsor"><button type="button" class=" btn btn btn-primary ml-3 px-5" style="background-color: #8DB859;">As a
+                sponsor</button></a>
+        </div>
+    </div>
+    <!-- end of impact stories -->
+    {% endif %}
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+
+<script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
+
+
+{% block footer %} {% include 'footer.html' %} {% endblock footer %}
+
+
+
+{% endblock %}

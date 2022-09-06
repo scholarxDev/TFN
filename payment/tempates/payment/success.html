@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Payment successful {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+{% comment %} 
+<main>
+    <div class="text-center mt-5 pt-5">
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1562243218/scholarx.co/icons/checked_eo3rkz.png" class="mt-5 pt-5">
+    </div>
+</main> {% endcomment %}
+
+<div class="text-center mt-5 pt-5">
+<p>Hello {{ payment.user }}</p>
+  {% for payment in payments %}
+
+        <div class="d-flex bd-highlight">
+          <div class="p-2 bd-highlight">
+            <p class="text-muted">{{ payment.user }}</p>
+            <small class="text-muted">{{payment.created_at}}</small>
+          </div>
+          <div class="ml-auto p-2 bd-highlight">
+              <small class="thousand">₦{{payment.amount}}</small>
+          </div>
+        </div> 
+
+    
+      {% endfor %}
+
+ </div>
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+
+{% endblock %}
+

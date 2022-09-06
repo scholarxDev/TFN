@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Payment {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+<div class="col-lg-6 col-md-6 col-sm-10 mt-5 pt-5 mx-auto">
+  <form id="ajax-payment" method="POST" action="payment_handler/">
+    {% csrf_token %}
+    <div id="form-messages" > 
+    <h3>Result</h3>
+    
+    </div>
+
+    <div class="field">
+      <label  for="amount"></label>
+      <input class="form-control" type="text" id="amount" name="amount" placeholder="Amount" required>
+    </div>
+    <button class="btn btn-primary w-100 mt-4 new">Pay</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://js.paystack.co/v2/popup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
+<script>
+    function payWithPaystack(){
+      var user = "{{ user.id }}";
+      var email = "{{ user.email }}";
+      var amt = +document.getElementById("amount").value * 100;
+      console.log(email)
+      var handler = PaystackPop.setup({
+        key: 'pk_live_a3dfe47f7918cd89af79a02c1ac57a268fe0cd6c',
+        email: email,
+        amount: amt/100,
+        currency: "NGN",
+        ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        metadata: {
+           custom_fields: [
+              {
+                  display_name: "Mobile Number",
+                  variable_name: "mobile_number",
+                  value: "+2348012345678"
+              }
+          ]
+        },
+        callback: function(response){
+          let newAmount = amt/100
+          data = {
+            email: email,
+            ref_id : response.reference,
+            amount : String(newAmount),
+          }
+          axios({method:"POST",url:"https://www.scholarx.co/payment/payment_handler/", data: JSON.stringify(data), headers : {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+              }})
+          .then(res => res.json(JSON.stringify(data)))
+        .catch(error => console.error('Error:', error));
+          alert("Thank you for using scholarX");
+          return window.location.reload(true)
+         }, onClose: function(){
+            alert('window closed');
+         } 
+        
+      });
+      
+    handler.openIframe();
+  }
+
+</script>
+
+<script>
+$(function() {
+    // Get the form.
+    var form = $('#ajax-payment');
+  
+    // Get the messages div.
+    var formMessages = $('#form-messages');
+  
+    // Set up an event listener for the contact form.
+    $(form).submit(function(event) {
+  
+        // Stop the browser from submitting the form.
+        event.preventDefault();
+        payWithPaystack();
+    })      
+  }); 
+</script> 
+
+
+
+<script>
+    console.log("{{user}}")
+</script>
+
+
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+
+
+{% endblock %

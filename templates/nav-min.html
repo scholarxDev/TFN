@@ -1,0 +1,22 @@
+{% load static %}
+
+{% block nav %}
+
+
+
+<!-- NAVBAR STARTS -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        {% if request.organization.name == "scholarx" %}
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980834/scholarx.co/ScholarX_fiog6y.png" alt="logo" class="img-responsive" style="height: 30px; width: 96px">
+        {%else%}
+        <img src="{{request.organization.logo.url}}" alt="logo" class="img-responsive" style="height: 30px; width: 200px">
+        {%endif%}
+    </a>
+   <div class="mr-auto"></div>
+   <p class="navbarmargin">Already have an account?<a href="/login" style="color: #96B46B"> Log in</a></p>   
+</nav>
+
+
+{% endblock nav %}

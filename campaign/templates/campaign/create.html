@@ -1,0 +1,75 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Create Campaign {% endblock %}
+
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+
+<main>
+    <div class="container" style ='margin-top: 110px;'>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h2>Create a new campaign</h2>
+                <p>This basic information wil represent your campaign on your campaign page, on your campaign card and in searches.</p>
+                   
+                    <form method="post">
+
+                        {% csrf_token %}
+                        
+                        {{ form.title|as_crispy_field }}
+                        {{ form.campaign_objective|as_crispy_field }}
+                        {{ form.duration|as_crispy_field}} 
+                        
+                        <button type="submit" class="btn btn-primary btn-block" id="signup">Submit</button>
+
+                    </form>
+
+            </div>
+
+
+             <div class="col-md-6">
+                <img src="https://res.cloudinary.com/schohxlg/image/upload/q_auto:best/v1563371321/everywhere_ygroso.png" class="mt-5">
+            <h3 class="text-center mt-5">Take ScholarX everywhere you go</h3>
+            <nav class="nav ml-5">
+                    <a class="nav-link active ml-2">
+                        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">
+                        Find tailor made scholarships just for you
+                    </a>
+                    <a class="nav-link active ml-2">
+                            <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">
+                            Access to over 10,000
+                        </a>
+                        <a class="nav-link active ml-2">
+                                <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">
+                                Get scholarships reminders and notifications
+                            </a>
+                 </nav>
+                 <div class="d-inline-flex p-2 bd-highlight ml-5">
+                     <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980832/scholarx.co/Appstore_hzh4gh.png" class="">
+                     <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980832/scholarx.co/Googleplay_bdppwv.png" class="mx-5">
+                 </div>
+        </div>
+
+
+        </div>
+    </div>
+
+</main>
+
+
+
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+{% endblock %}

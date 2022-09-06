@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block title %} Village {% endblock %}
+{% block content %}
+
+{% block javascript %}
+
+{% endblock %}
+<header >
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+<!-- JUMBOTRON -->
+ <div class="jumbotron scholarxvillage-jumbotron">
+     {% if request.organization.name == "scholarx"%}
+    <h2>Village by ScholarX</h2>
+    {%else%}
+    <h2>TFN PROJECTS</h2>
+    {%endif%}
+    <div>
+        <span>
+            <h3 class="count">{{fundrequest}}</h3> <br>
+            {% if request.organization.name == "scholarx"%}
+            <p>Fund Request</p>
+            {%else%}
+            <p>Project Requests</p>
+            {%endif%}
+        </span>
+        <span>
+            <h3>₦<span class="count">{{total_raised}}</span></h3> <br>
+            <p>Raised</p>
+        </span>
+        <span>
+            <h3 class="count">{{fully_funded}}</h3> <br>
+            <p>Fully Funded</p>
+        </span> 
+    </div>
+</div> 
+<!-- JUMBOTRON ENDS -->
+
+
+<div class="container mt-5 pt-5">
+
+     <div class="row">
+     
+        {% for fundrequest in fundrequests %}  
+        <div class="col-lg-3 col-md-4 col-sm-12">
+          <a href="{% url 'request_detail' fundrequest.pk%}">
+            <div class="card dance profileimage mt-4">
+                 {% cloudinary fundrequest.user.photo.image class="card-img-top img-fluid" height=200 width=253 %}
+                 <!-- <img src="{{ fundrequest.user.photo.image.url }}" class="card-img-top img-fluid"> -->
+                 <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'request_detail' fundrequest.pk%}" style="color: #38435b">{{ fundrequest.request_title | slice:":15"}}...</a></h5>
+
+                    <p class="card-text mt-3" style="color: #6A7890">{{ fundrequest.Tell_us_why_you_need_it | slice:":50" }}...<p> 
+                    <p class="font-weight-bolder mt-2"> ₦<span id ='raise'> {{ fundrequest.amount_raised }}</span> raised</p>
+                    <progress class = 'fund-progress-bar' id = 'demo' value= "{{fundrequest.percentage_raised}}" max = "100" > </progress>
+                    <small> <span id = 'percent'>{{fundrequest.percentage_raised}}</span> % of ₦ <span id="amt">  {{ fundrequest.How_much_do_you_need }}</span></small>   
+                </div>
+            </div>
+          </a>  
+        </div>
+
+        {% endfor %}
+ </div>
+   
+</div> 
+
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+<!--WaypointCDN-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+
+
+
+
+<script type="text/javascript">
+$(".count").counterUp({delay:10,time:1000});
+</script>
+
+{% endblock %}

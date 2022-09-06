@@ -1,0 +1,167 @@
+{% load static %}
+{% block nav %}
+
+
+<!-- NAVBAR STARTS -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        {% if request.organization == "scholarx"%}
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980834/scholarx.co/ScholarX_fiog6y.png" alt="logo" class="img-responsive" style="height: 30px; width: 96px">
+        {%else%}
+        <img src="{{request.organization.logo.url}}" alt="logo" class="img-responsive" style="height: 30px; width: 200px">
+        {%endif%}
+    </a>
+    {% if request.organization.name == "scholarx" %}
+        <div class="form-group mb-0  d-none d-md-flex" style="width:400px"> 
+            
+           <form class="form-inline navbar-form" action="{% url 'search' %}" method="GET" value="{{request.GET.q}}" >
+               <div class="input-group navbar-input">
+                   <div class="input-group-prepend">
+                       <span class="input-group-text" id="basic-addon1"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980838/scholarx.co/search_amiw8f.png"  alt="search" class="img-responsive"></span>
+                   </div>
+                   <input type="text" class="form-control" name="q" placeholder="Search for scholarship..." aria-label="Username" aria-describedby="basic-addon1" />
+                   <button type="submit" class="btn btn-light nav-button" value="Search"> Search </button>
+               </div>
+           </form>
+        
+        </div>
+    {% endif %}
+        <!-- <div class="hamburger"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        <!-- </div> -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="mr-auto"></div>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    {% if user.is_student %}
+                    <a class="nav-link " href="/student/dashboard">Dashboard</a>
+                    {% elif user.is_school %}
+                    <a class="nav-link " href="/school/dashboard">Dashboard</a>
+                    {% elif user.is_sponsor %}
+                    <a class="nav-link " href="/sponsor/dashboard">Dashboard</a>
+                    {% endif%}                                    
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{request.organization.account_name}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item"
+                        href="/village/fundrequest">Fund Request</a>
+                        {% if request.organization.name == "scholarx"%}
+                        <a class="dropdown-item" href="/scholarship">Find Scholarship</a>
+                        {%endif%}
+                       
+                    </div>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sponsor
+                    </a>
+                    {% if request.organization.name == "scholarx"%}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/village">Fund Village</a>
+                        <a class="dropdown-item" href="/campaign/create">Start Campaign</a>
+                    </div>
+                    {%else%}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/village">Fund project</a>
+                    </div>
+                    {%endif%}
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                    </a>
+                    {% if request.organization.name == "scholarx"%}
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/about">About Us</a>
+                        <a class="dropdown-item" href="/blog">Blog</a>
+                       
+                        <a class="dropdown-item" target="_blank"
+                        href="http://skillsfund.africa">SkillsFund
+                        <span class="skillsfund-new" style="color: red">(New)</span></a>
+                        <a class="dropdown-item" href="https://acadafest.com/" target="_blank">Acadafest</a>
+                        <a class="dropdown-item" href="https://wa.me/2349082463268" target="_blank"> <span> Chat
+                        with us on </span> <br> 09082463268</a>
+                        
+                    </div>
+                    {% else %}
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="https://wa.me/{{request.organization.whatsapp_contact}}" target="_blank"> <span> Chat
+                        with us on </span> <br> {{request.organization.whatsapp_contact}}</a>
+                        
+                    </div>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <hr class="vertical">
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% load cloudinary %}{% cloudinary user.photo.image.public_id className="my-class" height=25 width=25 radius="max" %} {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% if user.is_student %}
+                        <a class="dropdown-item" href="/student/profile">My Profile</a>
+                        {% elif user.is_school %}
+                        <a class="dropdown-item" href="/school/profile">My Profile</a>
+                        {% elif user.is_sponsor %}
+                        <a class="dropdown-item" href="/sponsor/profile">My Profile</a>
+                        {% endif%}                                    
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+
+                        {% else %}
+
+                        <li class="nav-item">
+                            <a class="nav-link login" href="/login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                           
+                            <a class="nav-link signup pl-3" href="/signup">Sign Up</a>
+                       
+                        </li>
+
+
+                    {% endif %}
+
+
+                    <li>
+                        <div class="form-group mb-0 d-flex d-sm-none mt-3 justi" style="width:400px">    
+                               <form class="form-inline navbar-form" action="{% url 'search' %}" method="GET" value="{{request.GET.q}}" >
+                                   <div class="input-group navbar-input">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text" id="basic-addon1"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980838/scholarx.co/search_amiw8f.png"  alt="search" class="img-responsive"></span>
+                                       </div>
+                                       <input type="text" class="form-control" name="q" placeholder="Search for scholarship..." aria-label="Username" aria-describedby="basic-addon1" />
+                                       <button type="submit" class="btn btn-light nav-button" value="Search"> Search </button>
+                                   </div>
+                               </form>
+
+                            
+                        </div>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+
+<!-- NAVBAR ENDS -->
+
+
+</div>
+
+{% endblock nav %}

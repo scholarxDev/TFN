@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %} Search {% endblock %}
+{% block content %}
+
+<header>
+  {% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+<div class="container mt-4 pt-3">
+{% if results %}
+  <p class="mt-5"><i>Search results: &nbsp; &nbsp;<b>{{ request.GET.q }}</b></i></p>
+  <br/>
+
+  <div class="row">
+    {% for result in results %}
+      <div class="col-lg-4 col-md-4 col-sm-12">
+       <a href="{{ scholarship.website }}" target="_blank" style="text-decoration: none">
+        <div class="card bg-light mb-3 dance" style="max-width: 20rem;height: 21rem;">
+          <div class="card-header" >
+            <h5 style="color: #454545">{{result.name}}</h5>   
+          </div>
+          <p class="card-title text-secondary mt-3 ml-3">&nbsp;&nbsp; Award:&nbsp;<span class="text-dark font-weight-normal">{{result.award}}</span></p>
+          <p class="card-title text-secondary mt-3 ml-3">&nbsp; &nbsp;Deadline:&nbsp;<span class="text-dark font-weight-normal">{{result.deadline.date}}</span></p>
+          <p class="card-title text-secondary mt-3 ml-3">&nbsp; &nbsp;Country:&nbsp;<span class="text-dark font-weight-normal">{{result.country.name}}</span></p>
+          <div class="scholarshipsearch">
+            <small>
+              {% for category in result.categories.all %}
+              <a href="{% url 'scholarship_category' category.name %}">
+                <div class="scholar mt-3">
+                  {{ category.name }}
+                </div>
+              </a>
+              {% endfor %}
+            </small> 
+          </div>    
+        </div>
+      </a>  
+      </div>
+    
+    {% endfor %}
+  </div>
+
+{% else %}
+  No search scholarships found
+{% endif %}
+</div>
+
+
+
+<footer>
+  {% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+{% endblock %}

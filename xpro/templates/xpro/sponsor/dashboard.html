@@ -1,0 +1,141 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% load cloudinary %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+
+
+<main>
+<div class="container" style ='margin-top: 110px;'>
+  <h2>Hi {{ user.username }},welcome.</h2>
+  <div class="bluepart">
+    <hr class="caution">
+    <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/caution_nylyql.png" class="caution ml-4">
+        <div class="toptext">
+        <h4>Our privacy policy has changed</h4>
+        <p>Make sure you know how these changes affect you, kindly update your profile.</p>
+      </div> 
+    </div>
+  {% if request.organization.name == "scholarx" %}
+  <div class="row">    
+  <div class="col-lg-4 col-md-4 col-sm-12 apply">
+      <a href="/campaign/create"  class="text-decoration-none" style="color: black">
+      <div class="card mt-3 campaigns" style="background-color: #ffffff;">
+        <div class="card-body">
+          <p class="card-title fundrequest">Start Campaign</p>
+          <small class="card-text active" style="color: #4A90E2">0 active funding application.</small>
+          <div class="d-flex justify-content-end">
+            <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/managecampaign_gg28go.png" class="h-50 campaign" style="margin-top: -3rem">
+          </div> 
+      </div>  
+      </div>
+      </a>
+      <div class="card mt-3 skillsfunds" style="background-color: #ffffff;">
+        <a href="http://skillsfund.africa" target="_blank" class="text-decoration-none" style="color: black">
+         <div class="card-body">
+            <p class="card-title skills">Donate to skillsFund</p>
+            <div class="d-flex justify-content-end">
+            <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/skillsfund_jwijoy.png" class="h-50 skillsfunds" style="margin-top: -2rem">
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="card mt-3 fund" style="background-color: #ffffff;">
+        <a href="/village"  class="text-decoration-none" style="color: black">
+          <div class="card-body">
+            <p class="card-title fundrequest">Fund Village</p>
+              <div class="d-flex justify-content-end">
+                <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980539/scholarx.co/icons/sponsorstudent_vbftcp.png" class="h-50 campaign" style="margin-top: -2rem">
+              </div>
+        </div>
+        </a>
+      </div>
+      <div class="card mt-3 fund" style="background-color: #ffffff;">
+        <div class="card-body">
+            <p class="card-title fundrequest">Hire a QuickStaff</p>
+              <div class="d-flex justify-content-end">
+                <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/quickstaff_z31his.png" class="h-50 campaign" style="margin-top: -3rem">
+              </div>
+        </div>
+      </div>
+    </div>
+    {%else%}
+      <div class="card mt-3 fund" style="background-color: #ffffff;">
+        <a href="/village"  class="text-decoration-none" style="color: black">
+          <div class="card-body">
+            <p>Thank you for your interest in funding a project, please click on the button below to access all projects implemented by Teach For Nigeria Fellows.</p>
+        </div>
+        </a>
+      </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card mt-3 fund" style="background-color: #ffffff;">
+          <a href="/village"  class="text-decoration-none" style="color: black">
+            <div class="card-body">
+              <p class="card-title fundrequest">Fund Project</p>
+                <div class="d-flex justify-content-end">
+                  <img src="https://image.flaticon.com/icons/png/512/1087/1087927.png" class="h-50 campaign" style="margin-top: -3rem; width:50px; height:50px;">
+                </div>
+          </div>
+          </a>
+        </div>
+        </div>
+        {%endif%}    
+
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+  
+            <h3 class="statistics-heading" style="margin-top: 9rem">RECENT <span class="ml-1">FUND</span><span class="ml-1">REQUESTS</span></h3>
+    
+          </div>
+    
+          <div class="col-lg-12 col-md-12 col-sm-12 statistics-rule">
+    
+            <hr />
+    
+          </div>
+    
+    </div>
+</div>
+     <div class="row">
+        {% for fundrequest in fundrequests %}
+        <div class="col-lg-3 col-md-4 col-sm-12 my-3">
+          <a href="{% url 'request_detail' fundrequest.pk%}">
+            <div class="card dance">
+                <img src="{{ fundrequest.user.photo.image.url }}" class="card-img-top img-fluid">
+                
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'request_detail' fundrequest.pk%}" style="color: #38435b">{{ fundrequest.title | slice:":15"}}...</a></h5>
+                    <p class="card-text mt-3" style="color: #6A7890">{{ fundrequest.Tell_us_why_you_need_it | slice:":50" }}...<p>
+                    <p class="font-weight-bolder mt-2"> ₦<span id ='raise'> {{ fundrequest.amount_raised }}</span> raised</p>
+                    <progress class = 'fund-progress-bar' id = 'demo' value= "{{fundrequest.percentage_raised}}" max ="100"> </progress>
+                    <h6>  <span id = 'percent'>{{fundrequest.percentage_raised}}</span> % of ₦ <span id="amt">  {{ fundrequest.How_much_do_you_need }}</span></h6>
+                </div>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+  {% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+
+
+
+{% endblock %}

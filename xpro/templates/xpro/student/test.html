@@ -1,0 +1,17 @@
+            {% comment %} {{ student_form.image |as_crispy_field }} {% endcomment %}
+         <div class="row">
+                <div class="col-6">
+                {{ user_form.username |as_crispy_field }}
+                </div>
+                <div class="col-6">
+                {{ user_form.email |as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                {{ user_form.first_name |as_crispy_field }}
+                </div>
+                <div class="col-6">
+                {{ user_form.last_name |as_crispy_field }}
+                </div>
+            </div>      

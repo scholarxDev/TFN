@@ -1,0 +1,93 @@
+
+
+{% load static %}
+{% block footer %}
+
+<footer style="background-color: #0C5061;" class="text-white mt-4" data-target=".aboutus" data-offset="50">
+    <div class="container aboutus">
+        {% if request.organization.name == "scholarx"%}
+        <div class="row">
+            <div class="col-md-6 col-xs-2">
+                <h2 class="mt-5">We're here to help</h2>
+                <!-- <p class="mt-3">Get the app on mobile</p>
+                <div class="d-flex flex-row bd-highlight mb-3 mr-3">
+                    <div class="p-2 bd-highlight">
+                        <a href="#"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980832/scholarx.co/Appstore_hzh4gh.png" class=""></a>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <a href="#"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980832/scholarx.co/Googleplay_bdppwv.png" class="rounded mx-auto d-block"></a>
+                    </div> -->
+                <!-- </div> -->
+            </div>
+            <div class="col-md-6 col-xs-2">
+                <p class="mt-5">Our team is eager to assist you. If you need help getting started, or you're having
+                    trouble using scholarX, get in touch so we can help.</p>
+            </div>
+        </div>
+            <hr class="" />
+            <div class="row">
+                <div class="col-md-6 col-xs-2">
+                    <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980837/scholarx.co/scholarx_white_lfbxxu.svg" alt="ScholarX" style="height: 30px; width: 96px">
+                    <p class="text-white mt-3">Get notified, subscribe to our newsletter</p>
+                    <form id="newsletter" method="post" action="newsletter/" >
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                          <input class="form-control form-rounded" type="text" id="email" name="email" placeholder="Email Address" required>
+                            <div class="input-group-append">
+                                 <button class="input-group-text form-rounded text-white footer-subscribe" id="basic-addon2" style="background-color: #96B46B">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="form-messages" hidden>
+
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    <h5 class="font-weight-bold">Student</h5>
+                    <a href="/scholarship" class="text-decoration-none text-white"><p class="font-weight-light">Find Scholarships</p></a>
+                   <a href="/village/fundrequest" class="text-decoration-none text-white"><p class="font-weight-light">Fund Request</p></a>
+                    <a href="" target="_blank" class="text-decoration-none text-white"><p class="font-weight-light">Get help</p></a>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    <h5 class="font-weight-bold">Sponsor</h5>
+                    <a href="/campaign/create"  class="text-decoration-none text-white"><p class="font-weight-light">Start Campaign</p></a>
+                    <a href="" target="_blank" class="text-decoration-none text-white"><p class="font-weight-light">Hire Quickstaff</p></a>
+                    <a href="/village"  class="text-decoration-none text-white"><p class="font-weight-light">Fund Village</p></a>
+                    
+                </div>
+                <div class="col-md-2 col-xs-2" >
+                    <h5 class="font-weight-bold">About Us</h5>
+                    <a href="/about" class="text-decoration-none text-white"><p class="font-weight-light">Team</p></a>
+                    <a href="/about#advisors"class="text-decoration-none text-white"><p class="font-weight-light">Advisors</p></a>
+                    <a href="/about#newsandmedia"  class="text-decoration-none text-white"><p class="font-weight-light">News and media</p></a>
+                </div>
+            </div>
+        </div>
+        {%endif%}
+        
+        <hr class="mt-5" />
+       <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            {% if request.organization.name == "scholarx"%}
+            <a href="https://www.facebook.com/ScholarxPage/?ref=br_rs" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/facebook_w_mwakaj.png" class="ml-2"></a>
+            <a href="https://twitter.com/scholarxEdu" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980539/scholarx.co/icons/twitter_w_q6rpqu.png" class="ml-2"></a>
+            <a href="https://www.instagram.com/scholarx/" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/instagram_w_wqoste.png" class="ml-2"></a>
+            {%else%}
+            <a href="{{request.organization.facebook}}" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/facebook_w_mwakaj.png" class="ml-2"></a>
+            <a href="{{request.organization.twitter}}" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980539/scholarx.co/icons/twitter_w_q6rpqu.png" class="ml-2"></a>
+            <a href="request.organization.instagram" target="_blank"><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980538/scholarx.co/icons/instagram_w_wqoste.png" class="ml-2"></a>
+            {%endif%}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            {% if request.organization.name == "scholarx"%}
+            <p>&copy; Scholarx, All rights reserved</p>
+            {% else %}
+            <p>&copy; {{request.organization.name}}, powered by <a href="http://scholarx.co/">Scholarx</a>, All rights reserved</p>
+            {% endif %}
+        </div>
+    </div>
+</footer>
+
+
+{% endblock footer %}

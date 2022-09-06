@@ -1,0 +1,27 @@
+{
+  "name": "scholarx",
+  "version": "1.0.0",
+  "description": "Quality Education For the Next Billion",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js --progress --colors --mode development",
+    "watch": "webpack --config webpack.config.js --watch --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "azeez@scholarx.co",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.35.2",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.3.5"
+  },
+  "dependencies": {
+    "@vue/cli": "^3.8.2",
+    "lodash": "^4.17.11",
+    "vue": "^2.6.10"
+  }
+}

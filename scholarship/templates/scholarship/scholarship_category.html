@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} category {% endblock %}
+{% block content %}
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+<div class="container mt-5 pt-5">
+        <h1>{{ category | title }}</h1>
+        <hr>
+        <div class="row">
+        {% for scholarship in scholarships %}
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card bg-light mb-3 dance" style="max-width: 19rem;">
+                    <div class="card-header" style="color: #454545">
+                        <h5><a style="color: #454545" href="{{ scholarship.website }}">{{scholarship.name}}</a></h5>   
+                    </div>
+                    <p class="card-title text-secondary mt-3">&nbsp; Award:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.award}}</span></p>
+                    <p class="card-title text-secondary mt-3">&nbsp; Deadline:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.deadline.date}}</span></p>
+                    <p class="card-title text-secondary mt-3">&nbsp; Country:&nbsp;<span class="text-dark font-weight-normal">{{scholarship.country.name}}</span></p>
+                
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<footer>
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Signup successful {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+<main>
+    <div class="text-center mt-5 pt-5">
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1562243218/scholarx.co/icons/checked_eo3rkz.png" class="mt-5 pt-5">
+        <h2 class="mt-5">Registration successful</h2>
+        <!-- <p>Your request has been successfully submitted.<br>
+        Your request would be published after our verification process.</p> -->
+        <p><a href="/sponsor/dashboard">Continue to dashboard</a></p>
+    </div>
+</main>
+
+
+<footer>
+    {% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+    
+    
+{% endblock %}
+    
+    

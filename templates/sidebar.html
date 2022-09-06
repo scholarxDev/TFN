@@ -1,0 +1,21 @@
+{% load static %}
+
+{% block sidebar %}
+
+
+<!-- Sidebar Widgets Column -->
+
+    <div class="col-lg-6 col-md-6 col-sm-12 form-sidebar">
+    <div class="panel panel-default">
+        <img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980839/scholarx.co/studentpage_rbv0pw.png"  class="mx-auto">
+        {% if request.organization.name == "scholarx" %}
+        <h3 class="mt-4">What you get with a free account</h3>
+        <p><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">Acces to 100,000+ Scholarships</p>
+        <p><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">Access to Village CrowdFunding</p>
+        <p><img src="https://res.cloudinary.com/schohxlg/image/upload/v1561980537/scholarx.co/icons/circle-checkbox_jcql3c.png"  class="img-fluid mr-2">Access to SkillsFund</p>
+        {% endif%}
+    </div>
+    </div> 
+
+
+{% endblock sidebar %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Scholarship Detail {% endblock %}
+{% block content %}
+
+
+<header>
+{% block nav %} {% include 'nav.html' %} {% endblock nav %}
+</header>
+
+<div class="container mt-5 pt-5">
+<div class="col-md-8 mx-auto">
+    <h3>{{ scholarship.name }}</h3>
+    <p>
+        {% for category in scholarship.categories.all %}
+        <a href="{% url 'scholarship_category' category.name %}" style="color: #96B46B">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </p>
+    <h5>Award : {{ scholarship.award }}</h5>
+    
+    <p>Deadline : {{ scholarship.deadline.date }}</p>
+    
+    <p>Country : {{ scholarship.country.name }}</p>
+
+    <a href="{{ scholarship.website }}"> Apply Here</a>
+    
+
+<footer style="margin-top: 15rem">
+{% block footer %} {% include 'footer-min.html' %} {% endblock footer %}
+</footer>
+
+{% endblock content %}
